@@ -26,7 +26,7 @@ class AuthController {
     try {
       const { email, password } = req.body;
       if (!email || !password) {
-        res.status(404).json({ message: "User not found !" });
+        res.status(400).json({ message: "Email and password are required !" });
         return;
       }
       const user = await UserModel.findOne({ email });
@@ -36,7 +36,7 @@ class AuthController {
       }
 
       if (password != user?.password) {
-        res.status(401).json({ message: "Password is invalid !" });
+        res.status(400).json({ message: "Password is invalid !" });
         return;
       }
       const JWT_SECRET = process.env.JWT_SECRET as string;
