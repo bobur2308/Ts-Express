@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 // Extend Request to include user property
-interface AuthRequest extends Request {
-  user?: string | JwtPayload;
+export interface AuthRequest extends Request {
+  user?: string | JwtPayload;  // user can be either a string or a JwtPayload
 }
 
 const authenticate = async (req: AuthRequest,res: Response,next: NextFunction): Promise<void> => {
