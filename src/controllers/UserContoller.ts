@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
-import UserModel from "../models/UserModel"; // Ensure correct import
+import { AuthRequest } from "../middlewares/authenticate";
+import "../../types/express"; 
+import UserModel from "../models/UserModel"; 
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 
 class UserController{
-  async getUserData(req:Request,res:Response):Promise<void>{
+  async getUserData(req:AuthRequest,res:Response):Promise<void>{
     try {
       const id = req.params.id
-      const reqUser:any = req.user
+      const reqUser = req.user
       if(!id){
         res.status(400).json({message:"Id not found !"})
         return
